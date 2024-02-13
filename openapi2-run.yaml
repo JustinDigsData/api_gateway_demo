@@ -1,0 +1,51 @@
+# openapi2-run.yaml
+swagger: '2.0'
+info:
+  title: Demo API
+  description: Example API created for JustinDigsData.com tutorial
+  version: 1.0.0
+schemes:
+- https
+produces:
+- application/json
+x-google-backend:
+  address: {{My Cloud Run URL}}
+securityDefinitions:
+  # This section configures basic authentication with an API key.
+  api_key:
+    type: "apiKey"
+    name: "x-api-key"
+    in: "header"
+security:
+      - api_key: []
+paths:
+  /get/helloworld:
+    get:
+      summary: Cloud Run hello world
+      operationId: helloworld
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+  /post/add:
+    post:
+      parameters:
+        - in: query
+          name: num1
+          type: number
+          required: true
+          description: First number to add
+        - in: query
+          name: num2
+          type: number
+          required: true
+          description: Second number to add
+      summary: Adds two numbers provided in the query parameters.
+      operationId: postAddQueryparamsNum1Num2
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+ 
